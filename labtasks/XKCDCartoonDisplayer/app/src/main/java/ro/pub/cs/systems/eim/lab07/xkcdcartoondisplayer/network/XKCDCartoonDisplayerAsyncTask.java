@@ -1,4 +1,4 @@
-package ro.pub.cs.systems.eim.lab07.xkcdcartoondisplayer.network;
+package ro.pub.cs.systems.eim.lab08.xkcdcartoondisplayer.network;
 
 import android.os.AsyncTask;
 import android.view.View;
@@ -6,7 +6,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import ro.pub.cs.systems.eim.lab07.xkcdcartoondisplayer.entities.XKCDCartoonInformation;
+import ro.pub.cs.systems.eim.lab08.xkcdcartoondisplayer.entities.XKCDCartoonInformation;
 
 public class XKCDCartoonDisplayerAsyncTask extends AsyncTask<String, Void, XKCDCartoonInformation> {
 

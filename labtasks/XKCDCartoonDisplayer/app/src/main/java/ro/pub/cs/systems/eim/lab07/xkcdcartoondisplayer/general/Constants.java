@@ -1,4 +1,4 @@
-package ro.pub.cs.systems.eim.lab07.xkcdcartoondisplayer.general;
+package ro.pub.cs.systems.eim.lab08.xkcdcartoondisplayer.general;
 
 public interface Constants {
 

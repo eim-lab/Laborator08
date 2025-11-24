@@ -1,4 +1,4 @@
-package ro.pub.cs.systems.eim.lab07.xkcdcartoondisplayer.general;
+package ro.pub.cs.systems.eim.lab08.xkcdcartoondisplayer.general;
 
 public class Constants {
 
@@ -19,5 +19,6 @@ public class Constants {
     final public static String HREF_ATTRIBUTE = "href";
 
     final public static String HTTP_PROTOCOL = "http:";
+    final public static String HTTPS_PROTOCOL = "https:";
 
 }

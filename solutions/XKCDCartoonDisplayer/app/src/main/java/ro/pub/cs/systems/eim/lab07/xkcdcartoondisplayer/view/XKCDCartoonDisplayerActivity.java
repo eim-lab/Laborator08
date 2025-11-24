@@ -1,14 +1,14 @@
-package ro.pub.cs.systems.eim.lab07.xkcdcartoondisplayer.view;
+package ro.pub.cs.systems.eim.lab08.xkcdcartoondisplayer.view;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import ro.pub.cs.systems.eim.lab07.xkcdcartoondisplayer.R;
-import ro.pub.cs.systems.eim.lab07.xkcdcartoondisplayer.general.Constants;
-import ro.pub.cs.systems.eim.lab07.xkcdcartoondisplayer.network.XKCDCartoonDisplayerAsyncTask;
+import ro.pub.cs.systems.eim.lab08.xkcdcartoondisplayer.R;
+import ro.pub.cs.systems.eim.lab08.xkcdcartoondisplayer.general.Constants;
+import ro.pub.cs.systems.eim.lab08.xkcdcartoondisplayer.network.XKCDCartoonDisplayerAsyncTask;
 
 public class XKCDCartoonDisplayerActivity extends AppCompatActivity {
 

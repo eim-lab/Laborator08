@@ -1,4 +1,4 @@
-package ro.pub.cs.systems.eim.lab07.xkcdcartoondisplayer.entities;
+package ro.pub.cs.systems.eim.lab08.xkcdcartoondisplayer.entities;
 
 import android.graphics.Bitmap;
 
