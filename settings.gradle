@@ -14,10 +14,6 @@ project(':javaSolutionCalculatorWebService').projectDir = new File(rootDir, 'sol
 include ':javaSolutionXCDCartoonDisplayer'
 project(':javaSolutionXCDCartoonDisplayer').projectDir = new File(rootDir, 'solutions/XKCDCartoonDisplayer/app')
 
-// Sample modules
-include ':samplesOcwCoursesDisplayer'
-project(':samplesOcwCoursesDisplayer').projectDir = new File(rootDir, 'samples/OCWCoursesDisplayer/app')
-
 // Kotlin Solution modules
 include ':kotlinSolutionCalculatorWebService'
 project(':kotlinSolutionCalculatorWebService').projectDir = new File(rootDir, 'solutions-kotlin/CalculatorWebService/app')
@@ -28,7 +24,4 @@ project(':jsoup-1.10.2').projectDir = new File(rootDir, 'labtasks/XKCDCartoonDis
 
 include ':httpclient-4.4.1.2'
 project(':httpclient-4.4.1.2').projectDir = new File(rootDir, 'labtasks/XKCDCartoonDisplayer/httpclient-4.4.1.2')
-
-include ':volley'
-project(':volley').projectDir = new File(rootDir, 'samples/OCWCoursesDisplayer/volley')
 

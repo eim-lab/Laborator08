@@ -25,11 +25,7 @@ The project now contains the following modules:
    - Location: `solutions/XKCDCartoonDisplayer/app`
    - Complete solution for XKCD Cartoon Displayer
 
-5. **samplesOcwCoursesDisplayer** (formerly `samples/OCWCoursesDisplayer`)
-   - Location: `samples/OCWCoursesDisplayer/app`
-   - Sample implementation of OCW Courses Displayer
-
-6. **kotlinSolutionCalculatorWebService** (formerly `solutions-kotlin/CalculatorWebService`)
+5. **kotlinSolutionCalculatorWebService** (formerly `solutions-kotlin/CalculatorWebService`)
    - Location: `solutions-kotlin/CalculatorWebService/app`
    - Kotlin-based solution with Jetpack Compose for CalculatorWebService
 
@@ -37,7 +33,12 @@ The project now contains the following modules:
 
 - **jsoup-1.10.2**: HTML parsing library
 - **httpclient-4.4.1.2**: HTTP client library (legacy)
-- **volley**: Google's HTTP library for Android
+
+### Standalone Projects (Not in Multi-Module)
+
+- **samples/OCWCoursesDisplayer**: Remains as a standalone project with its own build configuration
+  - Has its own `build.gradle`, `settings.gradle`, and gradle wrapper
+  - Includes sub-modules: `:app`, `:jsoup-1.10.2`, `:volley`, `:httpclient-4.4.1.2`
 
 ## Changes Made
 
@@ -183,10 +184,17 @@ Laborator08/
 │       ├── build.gradle
 │       └── app/                 # kotlinSolutionCalculatorWebService module
 └── samples/
-    └── OCWCoursesDisplayer/
-        ├── build.gradle
-        ├── app/                 # samplesOcwCoursesDisplayer module
-        └── volley/              # Library module
+    └── OCWCoursesDisplayer/     # Standalone project (not part of multi-module)
+        ├── build.gradle         # Independent build configuration
+        ├── settings.gradle      # Independent settings
+        ├── gradle.properties    # Independent properties
+        ├── gradle/              # Independent gradle wrapper
+        ├── gradlew
+        ├── gradlew.bat
+        ├── app/
+        ├── volley/              # Library module (local to OCWCoursesDisplayer)
+        ├── jsoup-1.10.2/
+        └── httpclient-4.4.1.2/
 ```
 
 ## Troubleshooting
