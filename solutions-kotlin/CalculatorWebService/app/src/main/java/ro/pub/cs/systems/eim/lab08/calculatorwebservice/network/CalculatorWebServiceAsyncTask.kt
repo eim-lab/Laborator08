@@ -73,7 +73,6 @@ class CalculatorWebServiceAsyncTask(resultTextView: TextView) : AsyncTask<String
     }
 
     override fun onPostExecute(result: String?) {
-        // Use the WeakReference to safely access the TextView
         val resultTextView = resultTextViewReference.get()
         resultTextView?.text = result
     }

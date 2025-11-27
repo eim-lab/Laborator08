@@ -12,6 +12,7 @@ import android.widget.Spinner
 import android.widget.TextView
 import ro.pub.cs.systems.eim.lab08.calculatorwebservice.R
 import ro.pub.cs.systems.eim.lab08.calculatorwebservice.network.CalculatorWebServiceAsyncTask
+import ro.pub.cs.systems.eim.lab08.calculatorwebservice.network.QuotesAsyncTask
 
 class CalculatorWebServiceActivity : AppCompatActivity() {
 
@@ -20,6 +21,8 @@ class CalculatorWebServiceActivity : AppCompatActivity() {
     private lateinit var resultTextView: TextView
     private lateinit var operationSpinner: Spinner
     private lateinit var methodSpinner: Spinner
+    private lateinit var quoteTextView: TextView
+    private var quoteIndex = 0
 
     private val displayResultButtonClickListener = object : View.OnClickListener {
         override fun onClick(view: View) {
@@ -31,6 +34,15 @@ class CalculatorWebServiceActivity : AppCompatActivity() {
 
             val calculatorWebServiceAsyncTask = CalculatorWebServiceAsyncTask(resultTextView)
             calculatorWebServiceAsyncTask.execute(operator1, operator2, operation, method)
+        }
+    }
+
+    private val fetchQuoteButtonClickListener = object : View.OnClickListener {
+        override fun onClick(view: View) {
+            val quotesAsyncTask = QuotesAsyncTask(quoteTextView)
+            quotesAsyncTask.execute(quoteIndex)
+            // Increment index for next time, wrap around after 100 quotes
+            quoteIndex = (quoteIndex + 1) % 100
         }
     }
 
@@ -58,6 +70,10 @@ class CalculatorWebServiceActivity : AppCompatActivity() {
         methodSpinner = findViewById(R.id.method_spinner)
         val displayResultButton: Button = findViewById(R.id.display_result_button)
         displayResultButton.setOnClickListener(displayResultButtonClickListener)
+        
+        quoteTextView = findViewById(R.id.quote_text_view)
+        val fetchQuoteButton: Button = findViewById(R.id.fetch_quote_button)
+        fetchQuoteButton.setOnClickListener(fetchQuoteButtonClickListener)
     }
 }
 
