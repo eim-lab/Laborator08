@@ -5,6 +5,8 @@
     <string name="operation">Operation</string>
     <string name="method">Method</string>
     <string name="display_result">Display Result</string>
+    <string name="fetch_quote">Fetch Motivational Quote</string>
+    <string name="quote_label">Motivational Quote:</string>
     <string-array name="operations">
         <item>plus</item>
         <item>minus</item>
