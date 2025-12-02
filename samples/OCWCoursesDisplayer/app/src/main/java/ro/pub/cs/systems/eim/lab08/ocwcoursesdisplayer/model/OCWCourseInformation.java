@@ -1,4 +1,4 @@
-package ro.pub.cs.systems.eim.lab07.ocwcoursesdisplayer.model;
+package ro.pub.cs.systems.eim.lab08.ocwcoursesdisplayer.model;
 
 public class OCWCourseInformation {
 

@@ -1,4 +1,4 @@
-package ro.pub.cs.systems.eim.lab07.ocwcoursesdisplayer.controller;
+package ro.pub.cs.systems.eim.lab08.ocwcoursesdisplayer.controller;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import ro.pub.cs.systems.eim.lab07.ocwcoursesdisplayer.R;
-import ro.pub.cs.systems.eim.lab07.ocwcoursesdisplayer.model.OCWCourseContent;
+import ro.pub.cs.systems.eim.lab08.ocwcoursesdisplayer.R;
+import ro.pub.cs.systems.eim.lab08.ocwcoursesdisplayer.model.OCWCourseContent;
 
 public class OCWCourseListAdapter extends BaseAdapter {
 

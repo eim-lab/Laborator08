@@ -1,4 +1,4 @@
-package ro.pub.cs.systems.eim.lab07.ocwcoursesdisplayer.general;
+package ro.pub.cs.systems.eim.lab08.ocwcoursesdisplayer.general;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;

@@ -7,6 +7,8 @@ public class Constants {
     final public static String TAG = "[Earthquake Lister]";
 
     final public static String EARTHQUAKE_LISTER_WEB_SERVICE_INTERNET_ADDRESS = "http://api.geonames.org/earthquakesJSON?";
+ // For http to work, need to use in Manifest file <application android:usesCleartextTraffic="true">
+ // This particular service is also available at https://secure.geonames.org/
 
     final public static String MISSING_INFORMATION_ERROR_MESSAGE = "All fields need to be completed!";
 

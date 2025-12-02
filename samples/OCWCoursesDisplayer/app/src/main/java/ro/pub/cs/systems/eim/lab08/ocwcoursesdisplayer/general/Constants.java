@@ -1,4 +1,4 @@
-package ro.pub.cs.systems.eim.lab07.ocwcoursesdisplayer.general;
+package ro.pub.cs.systems.eim.lab08.ocwcoursesdisplayer;
 
 public interface Constants {
 
