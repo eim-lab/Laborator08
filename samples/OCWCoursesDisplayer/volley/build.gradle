@@ -37,5 +37,3 @@ android {
 }
 
 apply from: 'rules.gradle'
-// Bintray is deprecated and no longer available
-// apply from: 'bintray.gradle'
