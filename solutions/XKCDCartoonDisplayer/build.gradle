@@ -1,25 +1,4 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+// Module build.gradle for javaSolutionXCDCartoonDisplayer
+// This file can contain module-specific configuration if needed
+// The app module's build.gradle contains the actual application configuration
 
-buildscript {
-    repositories {
-        mavenCentral()
-        google()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:8.13.1'
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-    }
-}
-
-allprojects {
-    repositories {
-        mavenCentral()
-        google()
-    }
-}
-
-tasks.register('clean', Delete) {
-    delete rootProject.buildDir
-}

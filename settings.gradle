@@ -1,0 +1,31 @@
+rootProject.name = 'Laborator08'
+
+// Java Skeleton modules (labtasks)
+include ':javaSkelCalculatorWebService'
+project(':javaSkelCalculatorWebService').projectDir = new File(rootDir, 'labtasks/CalculatorWebService/app')
+
+include ':javaSkelXCDCartoonDisplayer'
+project(':javaSkelXCDCartoonDisplayer').projectDir = new File(rootDir, 'labtasks/XKCDCartoonDisplayer/app')
+
+// Java Solution modules
+include ':javaSolutionCalculatorWebService'
+project(':javaSolutionCalculatorWebService').projectDir = new File(rootDir, 'solutions/CalculatorWebService/app')
+
+include ':javaSolutionXCDCartoonDisplayer'
+project(':javaSolutionXCDCartoonDisplayer').projectDir = new File(rootDir, 'solutions/XKCDCartoonDisplayer/app')
+
+// Kotlin Skeleton modules (labtasks)
+include ':kotlinSkelCalculatorWebService'
+project(':kotlinSkelCalculatorWebService').projectDir = new File(rootDir, 'labtasks-kotlin/CalculatorWebService/app')
+
+// Kotlin Solution modules
+include ':kotlinSolutionCalculatorWebService'
+project(':kotlinSolutionCalculatorWebService').projectDir = new File(rootDir, 'solutions-kotlin/CalculatorWebService/app')
+
+// Shared library modules
+include ':jsoup-1.10.2'
+project(':jsoup-1.10.2').projectDir = new File(rootDir, 'labtasks/XKCDCartoonDisplayer/jsoup-1.10.2')
+
+include ':httpclient-4.4.1.2'
+project(':httpclient-4.4.1.2').projectDir = new File(rootDir, 'labtasks/XKCDCartoonDisplayer/httpclient-4.4.1.2')
+

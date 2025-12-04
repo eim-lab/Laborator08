@@ -11,12 +11,15 @@ import android.widget.TextView;
 
 import ro.pub.cs.systems.eim.lab08.calculatorwebservice.R;
 import ro.pub.cs.systems.eim.lab08.calculatorwebservice.network.CalculatorWebServiceAsyncTask;
+import ro.pub.cs.systems.eim.lab08.calculatorwebservice.network.QuotesAsyncTask;
 
 public class CalculatorWebServiceActivity extends AppCompatActivity {
 
     private EditText operator1EditText, operator2EditText;
     private TextView resultTextView;
     private Spinner operationSpinner, methodSpinner;
+    private TextView quoteTextView;
+    private int quoteIndex = 0;
 
     private final DisplayResultButtonClickListener displayResultButtonClickListener = new DisplayResultButtonClickListener();
     private class DisplayResultButtonClickListener implements View.OnClickListener {
@@ -34,6 +37,18 @@ public class CalculatorWebServiceActivity extends AppCompatActivity {
         }
     }
 
+    private final FetchQuoteButtonClickListener fetchQuoteButtonClickListener = new FetchQuoteButtonClickListener();
+    private class FetchQuoteButtonClickListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View view) {
+            QuotesAsyncTask quotesAsyncTask = new QuotesAsyncTask(quoteTextView);
+            quotesAsyncTask.execute(quoteIndex);
+            // Increment index for next time, wrap around after 100 quotes
+            quoteIndex = (quoteIndex + 1) % 100;
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,5 +61,9 @@ public class CalculatorWebServiceActivity extends AppCompatActivity {
         methodSpinner = findViewById(R.id.method_spinner);
         Button displayResultButton = findViewById(R.id.display_result_button);
         displayResultButton.setOnClickListener(displayResultButtonClickListener);
+
+        quoteTextView = findViewById(R.id.quote_text_view);
+        Button fetchQuoteButton = findViewById(R.id.fetch_quote_button);
+        fetchQuoteButton.setOnClickListener(fetchQuoteButtonClickListener);
     }
 }
