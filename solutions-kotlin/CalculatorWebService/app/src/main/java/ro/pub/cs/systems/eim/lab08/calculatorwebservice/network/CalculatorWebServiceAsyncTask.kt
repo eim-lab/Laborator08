@@ -1,5 +1,6 @@
 package ro.pub.cs.systems.eim.lab08.calculatorwebservice.network
 
+import android.content.Context
 import android.os.AsyncTask
 import android.util.Log
 import android.widget.TextView
@@ -9,17 +10,23 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
 import okhttp3.Response
+import ro.pub.cs.systems.eim.lab08.calculatorwebservice.data.OperationsDatabaseHelper
 import ro.pub.cs.systems.eim.lab08.calculatorwebservice.general.Constants
 
-class CalculatorWebServiceAsyncTask(resultTextView: TextView) : AsyncTask<String, Void, String>() {
+class CalculatorWebServiceAsyncTask(
+    resultTextView: TextView,
+    context: Context
+) : AsyncTask<String, Void, String>() {
 
     private val resultTextViewReference: WeakReference<TextView> = WeakReference(resultTextView)
+    private val contextReference: WeakReference<Context> = WeakReference(context)
 
     override fun doInBackground(vararg params: String?): String? {
         val operator1 = params[0]
         val operator2 = params[1]
         val operation = params[2]
         val method = params[3]?.toInt() ?: 0
+        val methodName = if (method == Constants.GET_OPERATION) "GET" else "POST"
 
         if (operator1.isNullOrEmpty() || operator2.isNullOrEmpty()) {
             return Constants.ERROR_MESSAGE_EMPTY
@@ -60,15 +67,41 @@ class CalculatorWebServiceAsyncTask(resultTextView: TextView) : AsyncTask<String
 
             // Execute the request and get the response
             val response: Response = client.newCall(request).execute()
-            return if (response.isSuccessful && response.body != null) {
+            val result = if (response.isSuccessful && response.body != null) {
                 response.body!!.string()
             } else {
                 "Error: ${response.code} ${response.message}"
             }
 
+            // Save operation to database
+            val context = contextReference.get()
+            if (context != null) {
+                try {
+                    val dbHelper = OperationsDatabaseHelper(context)
+                    dbHelper.insertOperation(operator1.orEmpty(), operator2.orEmpty(), operation.orEmpty(), methodName, result)
+                } catch (e: Exception) {
+                    Log.e(Constants.TAG, "Failed to save operation to database: ${e.message}")
+                }
+            }
+
+            return result
+
         } catch (e: Exception) {
             Log.e(Constants.TAG, "OkHttp request failed: ${e.message}")
-            return "Error: ${e.message}"
+            val errorMessage = "Error: ${e.message}"
+            
+            // Save error operation to database
+            val context = contextReference.get()
+            if (context != null) {
+                try {
+                    val dbHelper = OperationsDatabaseHelper(context)
+                    dbHelper.insertOperation(operator1.orEmpty(), operator2.orEmpty(), operation.orEmpty(), methodName, errorMessage)
+                } catch (dbException: Exception) {
+                    Log.e(Constants.TAG, "Failed to save operation to database: ${dbException.message}")
+                }
+            }
+            
+            return errorMessage
         }
     }
 

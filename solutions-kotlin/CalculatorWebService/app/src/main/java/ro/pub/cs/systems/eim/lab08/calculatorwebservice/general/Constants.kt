@@ -17,5 +17,17 @@ object Constants {
     const val OPERATION_ATTRIBUTE = "operation"
     const val OPERATOR1_ATTRIBUTE = "t1"
     const val OPERATOR2_ATTRIBUTE = "t2"
+
+    // Database constants
+    const val DATABASE_NAME = "calculator_operations.db"
+    const val DATABASE_VERSION = 1
+    const val TABLE_NAME = "operations"
+    const val COLUMN_ID = "id"
+    const val COLUMN_OPERATOR1 = "operator1"
+    const val COLUMN_OPERATOR2 = "operator2"
+    const val COLUMN_OPERATION = "operation"
+    const val COLUMN_METHOD = "method"
+    const val COLUMN_RESULT = "result"
+    const val COLUMN_TIMESTAMP = "timestamp"
 }
 

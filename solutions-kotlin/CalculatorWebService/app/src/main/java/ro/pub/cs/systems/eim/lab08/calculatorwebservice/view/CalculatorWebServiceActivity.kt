@@ -5,14 +5,20 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
 import ro.pub.cs.systems.eim.lab08.calculatorwebservice.R
+import ro.pub.cs.systems.eim.lab08.calculatorwebservice.data.OperationsDatabaseHelper
+import ro.pub.cs.systems.eim.lab08.calculatorwebservice.general.Constants
 import ro.pub.cs.systems.eim.lab08.calculatorwebservice.network.CalculatorWebServiceAsyncTask
 import ro.pub.cs.systems.eim.lab08.calculatorwebservice.network.QuotesAsyncTask
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class CalculatorWebServiceActivity : AppCompatActivity() {
 
@@ -32,7 +38,7 @@ class CalculatorWebServiceActivity : AppCompatActivity() {
             // The method logic remains the same
             val method = methodSpinner.selectedItemPosition.toString()
 
-            val calculatorWebServiceAsyncTask = CalculatorWebServiceAsyncTask(resultTextView)
+            val calculatorWebServiceAsyncTask = CalculatorWebServiceAsyncTask(resultTextView, this@CalculatorWebServiceActivity)
             calculatorWebServiceAsyncTask.execute(operator1, operator2, operation, method)
         }
     }
@@ -43,6 +49,32 @@ class CalculatorWebServiceActivity : AppCompatActivity() {
             quotesAsyncTask.execute(quoteIndex)
             // Increment index for next time, wrap around after 100 quotes
             quoteIndex = (quoteIndex + 1) % 100
+        }
+    }
+
+    private val showHistoryButtonClickListener = object : View.OnClickListener {
+        override fun onClick(view: View) {
+            val dbHelper = OperationsDatabaseHelper(this@CalculatorWebServiceActivity)
+            val operations = dbHelper.getAllOperations()
+            
+            Log.d(Constants.TAG, "========== OPERATIONS HISTORY ==========")
+            if (operations.isEmpty()) {
+                Log.d(Constants.TAG, "No operations found in database.")
+            } else {
+                val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+                operations.forEachIndexed { index, operation ->
+                    val timestamp = dateFormat.format(Date(operation.timestamp))
+                    Log.d(Constants.TAG, "Operation #${index + 1}:")
+                    Log.d(Constants.TAG, "  Operator 1: ${operation.operator1}")
+                    Log.d(Constants.TAG, "  Operator 2: ${operation.operator2}")
+                    Log.d(Constants.TAG, "  Operation: ${operation.operation}")
+                    Log.d(Constants.TAG, "  Method: ${operation.method}")
+                    Log.d(Constants.TAG, "  Result: ${operation.result}")
+                    Log.d(Constants.TAG, "  Timestamp: $timestamp")
+                    Log.d(Constants.TAG, "  ---")
+                }
+            }
+            Log.d(Constants.TAG, "========================================")
         }
     }
 
@@ -74,6 +106,9 @@ class CalculatorWebServiceActivity : AppCompatActivity() {
         quoteTextView = findViewById(R.id.quote_text_view)
         val fetchQuoteButton: Button = findViewById(R.id.fetch_quote_button)
         fetchQuoteButton.setOnClickListener(fetchQuoteButtonClickListener)
+        
+        val showHistoryButton: Button = findViewById(R.id.show_history_button)
+        showHistoryButton.setOnClickListener(showHistoryButtonClickListener)
     }
 }
 
