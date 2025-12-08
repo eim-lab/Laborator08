@@ -3,13 +3,22 @@ package ro.pub.cs.systems.eim.lab08.calculatorwebservice.view;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
 import ro.pub.cs.systems.eim.lab08.calculatorwebservice.R;
+import ro.pub.cs.systems.eim.lab08.calculatorwebservice.data.OperationRecord;
+import ro.pub.cs.systems.eim.lab08.calculatorwebservice.data.OperationsDatabaseHelper;
+import ro.pub.cs.systems.eim.lab08.calculatorwebservice.general.Constants;
 import ro.pub.cs.systems.eim.lab08.calculatorwebservice.network.CalculatorWebServiceAsyncTask;
 import ro.pub.cs.systems.eim.lab08.calculatorwebservice.network.QuotesAsyncTask;
 
@@ -32,7 +41,7 @@ public class CalculatorWebServiceActivity extends AppCompatActivity {
             // The method logic remains the same
             String method = String.valueOf(methodSpinner.getSelectedItemPosition());
 
-            CalculatorWebServiceAsyncTask calculatorWebServiceAsyncTask = new CalculatorWebServiceAsyncTask(resultTextView);
+            CalculatorWebServiceAsyncTask calculatorWebServiceAsyncTask = new CalculatorWebServiceAsyncTask(resultTextView, CalculatorWebServiceActivity.this);
             calculatorWebServiceAsyncTask.execute(operator1, operator2, operation, method);
         }
     }
@@ -46,6 +55,36 @@ public class CalculatorWebServiceActivity extends AppCompatActivity {
             quotesAsyncTask.execute(quoteIndex);
             // Increment index for next time, wrap around after 100 quotes
             quoteIndex = (quoteIndex + 1) % 100;
+        }
+    }
+
+    private final ShowHistoryButtonClickListener showHistoryButtonClickListener = new ShowHistoryButtonClickListener();
+    private class ShowHistoryButtonClickListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View view) {
+            OperationsDatabaseHelper dbHelper = new OperationsDatabaseHelper(CalculatorWebServiceActivity.this);
+            List<OperationRecord> operations = dbHelper.getAllOperations();
+
+            Log.d(Constants.TAG, "========== OPERATIONS HISTORY ==========");
+            if (operations.isEmpty()) {
+                Log.d(Constants.TAG, "No operations found in database.");
+            } else {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                for (int i = 0; i < operations.size(); i++) {
+                    OperationRecord operation = operations.get(i);
+                    String timestamp = dateFormat.format(new Date(operation.getTimestamp()));
+                    Log.d(Constants.TAG, "Operation #" + (i + 1) + ":");
+                    Log.d(Constants.TAG, "  Operator 1: " + operation.getOperator1());
+                    Log.d(Constants.TAG, "  Operator 2: " + operation.getOperator2());
+                    Log.d(Constants.TAG, "  Operation: " + operation.getOperation());
+                    Log.d(Constants.TAG, "  Method: " + operation.getMethod());
+                    Log.d(Constants.TAG, "  Result: " + operation.getResult());
+                    Log.d(Constants.TAG, "  Timestamp: " + timestamp);
+                    Log.d(Constants.TAG, "  ---");
+                }
+            }
+            Log.d(Constants.TAG, "========================================");
         }
     }
 
@@ -65,5 +104,8 @@ public class CalculatorWebServiceActivity extends AppCompatActivity {
         quoteTextView = findViewById(R.id.quote_text_view);
         Button fetchQuoteButton = findViewById(R.id.fetch_quote_button);
         fetchQuoteButton.setOnClickListener(fetchQuoteButtonClickListener);
+
+        Button showHistoryButton = findViewById(R.id.show_history_button);
+        showHistoryButton.setOnClickListener(showHistoryButtonClickListener);
     }
 }
