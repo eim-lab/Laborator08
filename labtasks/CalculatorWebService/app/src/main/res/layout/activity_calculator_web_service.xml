@@ -7,7 +7,9 @@
     android:orientation="vertical"
     android:fitsSystemWindows="true"
     tools:context="ro.pub.cs.systems.eim.lab08.calculatorwebservice.view.CalculatorWebServiceActivity">
-
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="60dp"/>
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
