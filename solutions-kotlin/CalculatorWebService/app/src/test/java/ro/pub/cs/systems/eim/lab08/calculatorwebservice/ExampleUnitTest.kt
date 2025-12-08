@@ -1,4 +1,4 @@
-package ro.pub.cs.systems.eim.calculatorwebservice
+package ro.pub.cs.systems.eim.lab08.calculatorwebservice
 
 import org.junit.Test
 
